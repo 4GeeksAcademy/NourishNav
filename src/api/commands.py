@@ -1,6 +1,6 @@
 
 import click
-from api.models import db, User
+from api.models import db, User, Recipe
 
 """
 In this file, you can add as many commands as you want using the @app.cli.command decorator
@@ -32,3 +32,19 @@ def setup_commands(app):
     @app.cli.command("insert-test-data")
     def insert_test_data():
         pass
+
+    @app.cli.command("insert-recipes") 
+    def insert_recipes():
+        recipe_list = [
+            {
+                "name": "Dude, Where's my Closet?",
+                "pic_url": "https://i.imgur.com/SmhGAwI.png",
+            }
+        ]
+        for recipe in recipe_list:
+        new_recipe = Recipe(
+            name = recipe['name'],
+            pic_url = recipe['pic_url'],
+        )
+        db.session.add(new_recipe)
+        db.session.commit()

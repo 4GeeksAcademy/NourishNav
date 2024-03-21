@@ -26,3 +26,18 @@ class User(db.Model):
             "activity_level": self.activity_level,
             # do not serialize the password, its a security breach
         }
+
+class Recipe(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(60), nullable=True)
+    pic_url = db.Column(db.String(60), nullable=True)
+
+    def __repr__(self):
+        return f'<User {self.id}>'
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            # do not serialize the password, its a security breach
+        }

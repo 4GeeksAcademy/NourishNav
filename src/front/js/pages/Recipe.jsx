@@ -1,12 +1,12 @@
 import React from "react";
-import "./recipe.css";
-import foodImage2 from "../../assets/foodImage2.jpg";
-import buddhaBowl from "../../assets/buddhaBowl.jpg";
-import breakfast1 from "../../assets/breakfast1.jpg";
-import breakfast2 from "../../assets/breakfast2.jpg";
-import breakfast3 from "../../assets/breakfast3.jpg";
-import veggieWrap from "../../assets/veggieWrap.jpeg";
-import lunch3 from "../../assets/lunch3.jpeg";
+import "../../styles/recipe.css";
+import foodImage2 from "../../img/foodImage2.jpg";
+import buddhaBowl from "../../img/buddhaBowl.jpg";
+import breakfast1 from "../../img/breakfast1.jpg";
+import breakfast2 from "../../img/breakfast2.jpg";
+import breakfast3 from "../../img/breakfast3.jpg";
+import veggieWrap from "../../img/veggieWrap.jpeg";
+import lunch3 from "../../img/lunch3.jpeg";
 
 const addFavorite = (recipe) => {
   setFavorites((prevFavorites) => {
@@ -79,34 +79,7 @@ const Recipe = () => {
             Try one of our Delicious and Balanced Recipes
           </h3>
           <div className="row row-cols-1 row-cols-md-3 g-4">
-            <div className="col">
-              <div className="card h-100 recipe-card">
-                <img
-                  src={breakfast2}
-                  className="card-img-top"
-                  alt="Breakfast 1"
-                  style={{ height: "200px", objectFit: "cover" }}
-                />
-                <div className="card-body">
-                  <h5 className="card-title">Buddha Bowl</h5>
-                  <h6 className="card-subtitle mb-2 text-muted">
-                    Delicious and Nutritious
-                  </h6>
-                  <p className="card-text">
-                    Discover the perfect balance of flavors and nutrients in our
-                    Buddha Bowl. Packed with protein, fiber, and essential
-                    vitamins.
-                  </p>
-                  <button
-                    type="button"
-                    className="btn btn-success"
-                    onClick={() => addFavorite(recipe)}
-                  >
-                    <i className="fa-regular fa-heart"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
+           
             <div className="col">
               <div className="card h-100 recipe-card">
                 <img

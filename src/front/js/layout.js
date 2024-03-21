@@ -7,13 +7,13 @@ import { Home } from "./pages/home";
 import { Demo } from "./pages/demo";
 import Login from "./pages/login";
 import Private from "./pages/profile";
+import Recipe from "./pages/Recipe.jsx";
 import Signup from "./pages/signup";
 import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
-import Recipe from "../../components/recipe/Recipe.jsx";
 
 //create your first component
 const Layout = () => {

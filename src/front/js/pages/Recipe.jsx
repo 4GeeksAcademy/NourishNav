@@ -43,28 +43,6 @@ const Recipe = () => {
               </div>
             </div>
           </div>
-          {/* <div className="col-md-4">
-            <div className="card bg-light p-3">
-              <h3 className="text-center mb-4">Join Our Newsletter</h3>
-              <p className="text-center">
-                Stay updated with our latest recipes, nutrition tips, and
-                special offers.
-              </p>
-              <form>
-                <div className="mb-3">
-                  <input
-                    type="email"
-                    className="form-control"
-                    id="emailInput"
-                    placeholder="Your Email Address"
-                  />
-                </div>
-                <button type="submit" className="btn btn-success w-100">
-                  Subscribe
-                </button>
-              </form>
-            </div>
-          </div> */}
         </div>
       </div>
       <div className="container">

@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-export default function favCard(id) {
+export default function recipeCard(id) {
     const [reciepe, setRecipe] = useState({})
     useEffect(()= > {
         // here you will make a fetch request passing in the id to get the recipe you need

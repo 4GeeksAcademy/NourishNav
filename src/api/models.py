@@ -29,8 +29,12 @@ class User(db.Model):
 
 class Recipe(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(60), nullable=True)
-    pic_url = db.Column(db.String(60), nullable=True)
+    title = db.Column(db.String(60), nullable=True)
+    subtitle = db.Column(db.String(60), nullable=True)
+    desc = db.Column(db.String(60), nullable=True)
+    img_url = db.Column(db.String(60), nullable=True)
+
+    # img, title, subtilte, description is what you will need in the recipe class in model.py for now
 
     def __repr__(self):
         return f'<User {self.id}>'
@@ -38,6 +42,10 @@ class Recipe(db.Model):
     def serialize(self):
         return {
             "id": self.id,
-            "name": self.name,
+            "title": self.title,
+            "subtitle": self.subtitle,
+            "desc": self.desc,
+            "img_url": self.img_url
+
             # do not serialize the password, its a security breach
         }

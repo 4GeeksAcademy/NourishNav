@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "../../styles/recipe.css";
 
 export default function RecipeCard({ id }) {
   const [recipe, setRecipe] = useState({});

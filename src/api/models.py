@@ -36,16 +36,16 @@ class Recipe(db.Model):
 
     # img, title, subtilte, description is what you will need in the recipe class in model.py for now
 
-    def __repr__(self):
-        return f'<User {self.id}>'
+    # def __repr__(self):
+    #     return f'<User {self.id}>'
 
-    def serialize(self):
-        return {
-            "id": self.id,
-            "title": self.title,
-            "subtitle": self.subtitle,
-            "desc": self.desc,
-            "img_url": self.img_url
+    # def serialize(self):
+    #     return {
+    #         "id": self.id,
+    #         "title": self.title,
+    #         "subtitle": self.subtitle,
+    #         "desc": self.desc,
+    #         "img_url": self.img_url
 
             # do not serialize the password, its a security breach
-        }
+        # }

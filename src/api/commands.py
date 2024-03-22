@@ -86,7 +86,7 @@ def setup_commands(app):
             },
         ]
         for recipe in recipe_list:
-        new_recipe = Recipe(
+            new_recipe = Recipe(
             title = recipe['title'],
             img_url = recipe['img_url'],
             substitle = recipe['subtitle'],

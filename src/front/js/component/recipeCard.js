@@ -2,19 +2,43 @@ import React, { useState, useEffect } from "react";
 
 export default function RecipeCard({ id }) {
   const [recipe, setRecipe] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Will change once I establish my API/DATABASE
+    // Reset loading state
+    setLoading(true);
+    setError(null);
+
+    // Fetch recipe data
     fetch(`https://your-api-endpoint/recipes/${id}`)
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to fetch recipe");
+        }
+        return response.json();
+      })
       .then((data) => {
         setRecipe(data);
+        setLoading(false);
       })
       .catch((error) => {
-        console.error("Error fetching recipe:", error);
+        setError(error.message);
+        setLoading(false);
       });
   }, [id]);
 
+  // Render loading state
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  // Render error state
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+  // Render recipe card
   return (
     <div className="card h-100 recipe-card">
       <img

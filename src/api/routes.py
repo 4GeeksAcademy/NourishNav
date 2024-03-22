@@ -10,6 +10,7 @@ from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
 from flask_jwt_extended import JWTManager
 from flask_cors import CORS 
+from commands import recipe_list
 
 api = Blueprint('api', __name__)
 
@@ -64,3 +65,16 @@ def handle_private():
         return jsonify({"user_id": user.id, "email":user.email}), 200
 # end of user related routes
 
+
+# Route to get all recipes with their macros
+@app.route('/recipes', methods=['GET'])
+def get_all_recipes():
+    return jsonify(recipe_list)
+
+# Route to get individual recipe by ID
+@app.route('/recipes/<int:id>', methods=['GET'])
+def get_recipe_by_id(id):
+    for recipe in recipe_list:
+        if recipe['id'] == str(id):
+            return jsonify(recipe)
+    return jsonify({"error": "Recipe not found"}), 404

@@ -1,26 +1,44 @@
 const apiUrl = process.env.BACKEND_URL;
 const getState = ({ getStore, getActions, setStore }) => {
-	return {
-		store: {
-			message: null,			
-			token: null,
-			user: null,
+  return {
+    store: {
+      message: null,
+      token: null,
+      user: null,
       favorites: [],
-		},
-		actions: {
-      addFavorites: (fav) => {
+    },
+    actions: {
+      addFavorites: async (fav) => {
+        let response = await fetch(process.env.BACKEND_URL + "/favorites", {
+          method: "Post",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            recipe_name: fav,
+          }),
+        });
+        let data = response.json();
+        console.log(data);
         setStore({ favorites: [...getStore().favorites, fav] });
       },
-      removeFavorites: (fav) => {
-        setStore({
-          favorites: [...getStore().favorites.filter((item) => item !== fav)],
+      removeFavorites: async (fav) => {
+        let response = await fetch(process.env.BACKEND_URL + "/favorites", {
+          method: "DELTE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            recipe_name: fav,
+          }),
         });
+        let data = response.json();
+        console.log(data);
+		actions: {
+      // Use getActions to call a function within a fuction
+      exampleFunction: () => {
+        getActions().changeColor(0, "green");
       },
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
-        
-			},
 			signUp: async (form, callback) => {
 				const url = apiUrl + "/api/signup";
 				try {
@@ -122,8 +140,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				if (token && token!= null && token!=undefined) setStore({token: token});
 			},
 
-		}
-	};
+      },
+    },
+  };
+			
 };
 
 export default getState;

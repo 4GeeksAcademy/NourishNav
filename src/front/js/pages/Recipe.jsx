@@ -23,7 +23,7 @@ const Recipe = () => {
   return (
     <div
       className="hero-section"
-      style={{ backgroundImage: `url(${foodImage2})` }}
+      style={{ backgroundColor: '#ffffff' }}
     >
       <div className="container py-5">
         <h1 className="text-center text-white mb-5">Nutrition Made Easy</h1>

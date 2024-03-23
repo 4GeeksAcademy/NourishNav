@@ -8,12 +8,14 @@ import { Demo } from "./pages/demo";
 import Login from "./pages/login";
 import Private from "./pages/profile";
 import Recipe from "./pages/Recipe.jsx";
+
 import Signup from "./pages/signup";
 import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
+import AboutUs from "./component/AboutUs.jsx"
 
 //create your first component
 const Layout = () => {
@@ -37,6 +39,7 @@ const Layout = () => {
             <Route element={<Private />} path="/profile" />
             <Route element={<Signup />} path="/signup" />
             <Route element={<Login />} path="/login" />
+            <Route element={<AboutUs />} path="/about_us" />
             <Route element={<h1>Not found!</h1>} />
           </Routes>
           <Footer />

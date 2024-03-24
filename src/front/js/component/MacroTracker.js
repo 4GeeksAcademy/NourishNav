@@ -19,7 +19,7 @@ function MacroTracker() {
     const calories = parseInt(caloriesInput.value);
 
     if (foodItem !== "" && !isNaN(calories)) {
-      const newMeal = [...meals[meal], { foodItem, calories }];
+      const newMeal = [...meals[meal], { id: Date.now(), foodItem, calories }];
       setMeals({ ...meals, [meal]: newMeal });
 
       setTotalCalories(totalCalories + calories);
@@ -32,9 +32,15 @@ function MacroTracker() {
     }
   };
 
+  const deleteFood = (meal, id, calories) => {
+    const updatedMeals = meals[meal].filter((item) => item.id !== id);
+    setMeals({ ...meals, [meal]: updatedMeals });
+    setTotalCalories(totalCalories - calories);
+  };
+
   return (
     <div className="container">
-      <h2 className="text-center mb-4">Macro Tracking</h2>
+      <h2>Macro Tracking</h2>
 
       {Object.keys(meals).map((meal, index) => (
         <div className="meal-container" key={index}>
@@ -60,8 +66,19 @@ function MacroTracker() {
           </div>
           <ul className="list-group mt-2">
             {meals[meal].map((item, index) => (
-              <li className="list-group-item" key={index}>
-                {item.foodItem} - {item.calories} calories
+              <li
+                className="list-group-item d-flex justify-content-between align-items-center"
+                key={index}
+              >
+                <span>
+                  {item.foodItem} - {item.calories} calories
+                </span>
+                <button
+                  className="btn btn-danger btn-sm"
+                  onClick={() => deleteFood(meal, item.id, item.calories)}
+                >
+                  Delete
+                </button>
               </li>
             ))}
           </ul>

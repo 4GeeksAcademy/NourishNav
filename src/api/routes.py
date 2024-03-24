@@ -1,7 +1,8 @@
 """
 This module takes care of starting the API Server, Loading the DB, and Adding the endpoints.
 """
-from flask import Flask, request, jsonify, url_for, Blueprint
+from flask import Flask, request, jsonify, url_for, Blueprint, current_app 
+from flask_mail import Message, Mail  
 from api.models import db, User
 from api.utils import generate_sitemap, APIException
 import hashlib
@@ -11,6 +12,8 @@ from flask_jwt_extended import jwt_required
 from flask_jwt_extended import JWTManager
 from flask_cors import CORS
 from flask_bcrypt import Bcrypt  # Add this import for Bcrypt
+
+mail = Mail()
 
 api = Blueprint('api', __name__)
 

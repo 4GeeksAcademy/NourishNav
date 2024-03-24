@@ -13,10 +13,11 @@ export const Home = () => {
     const navigate = useNavigate();
 
     const handleLogin = async () => {
+        console.log("you clicked me")
         try {
             const result = await actions.login({ email, password });
             if (result) {
-                navigate("/private"); // Navigate to profile if login is successful
+            navigate("/profile"); // Navigate to profile if login is successful
             }
         } catch (error) {
             setLoginError("Failed to log in: " + error.message);

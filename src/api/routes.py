@@ -66,15 +66,33 @@ def handle_private():
 # end of user related routes
 
 
-# Route to get all recipes with their macros
 @api.route('/recipes', methods=['GET'])
 def get_all_recipes():
-    return jsonify(recipe_list)
+    recipes = Recipe.query.all()
+    recipes_data = [
+        {
+            'id': recipe.id,
+            'title': recipe.title,
+            'subtitle': recipe.subtitle,
+            'desc': recipe.desc,
+            'img_url': recipe.img_url,
+            # Add other fields as needed
+        }
+        for recipe in recipes
+    ]
+    return jsonify(recipes_data)
 
-# Route to get individual recipe by ID
 @api.route('/recipes/<int:id>', methods=['GET'])
-def recipe_list(id):
-    for recipe in recipe_list:
-        if recipe['id'] == str(id):
-            return jsonify(recipe)
-    return jsonify({"error": "Recipe not found"}), 404
+def recipe_detail(id):
+    recipe = Recipe.query.get(id)
+    if recipe:
+        return jsonify({
+            'id': recipe.id,
+            'title': recipe.title,
+            'subtitle': recipe.subtitle,
+            'desc': recipe.desc,
+            'img_url': recipe.img_url,
+            # Add other fields as needed
+        })
+    else:
+        return jsonify({"error": "Recipe not found"}), 404

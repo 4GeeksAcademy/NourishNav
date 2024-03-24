@@ -15,12 +15,12 @@ import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
-import AboutUs from "./component/AboutUs.jsx"
+// import recipe_list from "../../../src/api/recipe_data.py"
+import AboutUs from "./component/AboutUs.jsx";
 
-//create your first component
+import MacroTracker from "./component/MacroTracker";
+
 const Layout = () => {
-  //the basename is used when your project is published in a subdirectory and not in the root of the domain
-  // you can set the basename on the .env file located at the root of this project, E.g: BASENAME=/react-hello-webapp/
   const basename = process.env.BASENAME || "";
 
   if (!process.env.BACKEND_URL || process.env.BACKEND_URL == "")
@@ -34,7 +34,8 @@ const Layout = () => {
           <Routes>
             <Route element={<Home />} path="/" />
             <Route element={<Demo />} path="/demo" />
-            <Route element={<Recipe recipes={Recipe} />} path="/recipe" />
+            <Route element={<MacroTracker />} path="/macro" />
+            {/* <Route element={<Recipe recipeList={recipe_list} />} path="/recipe" /> */}
             <Route element={<Single />} path="/single/:theid" />
             <Route element={<Private />} path="/profile" />
             <Route element={<Signup />} path="/signup" />

@@ -1,0 +1,76 @@
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h2 {
+  text-align: center;
+  color: #2ecc71; /* Mint green */
+}
+
+.meal-container {
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #f9f9f9; /* Light gray */
+}
+
+.meal-name {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #2ecc71; /* Mint green */
+}
+
+.food-item input {
+  margin-right: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+}
+
+.food-item button {
+  border: none;
+  background-color: #2ecc71; /* Mint green */
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.food-item button:hover {
+  background-color: #27ae60; /* Darker mint green on hover */
+}
+
+.list-group-item {
+  border: none;
+  background-color: #f9f9f9; /* Light gray */
+  border-radius: 5px;
+}
+
+#total-calories {
+  font-weight: bold;
+  color: #2ecc71; /* Mint green */
+}
+
+/* Media queries for responsiveness */
+
+/* For devices with a max width of 768px (e.g., tablets) */
+@media (max-width: 768px) {
+  .container {
+    max-width: 90%; /* Adjust to fit the screen width */
+  }
+}
+
+/* For devices with a max width of 576px (e.g., smartphones) */
+@media (max-width: 576px) {
+  .container {
+    padding: 10px; /* Adjust padding for smaller screens */
+  }
+
+  .meal-name {
+    font-size: 16px; /* Decrease font size for smaller screens */
+  }
+}

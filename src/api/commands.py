@@ -33,8 +33,8 @@ def setup_commands(app):
     def insert_test_data():
         pass
 
-    @app.cli.command("insert-recipes") 
-    def insert_recipes():
+    # @app.cli.command("insert-recipes") 
+    # def insert_recipes():
         recipe_list = [
             {
                 "id": "1",

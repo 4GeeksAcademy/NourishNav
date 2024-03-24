@@ -1,69 +1,34 @@
-import React, { useState, useEffect } from "react";
-import "../../styles/recipe.css";
+import React from 'react';
 
-export default function RecipeCard({ id }) {
-  const [recipe, setRecipe] = useState({});
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    // Reset loading state
-    setLoading(true);
-    setError(null);
-
-    // Fetch recipe data
-    fetch(`https://your-api-endpoint/recipes/${id}`)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to fetch recipe");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setRecipe(data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        setError(error.message);
-        setLoading(false);
-      });
-  }, [id]);
-
-  // Render loading state
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  // Render error state
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
-
-  // Render recipe card
+const RecipeCard = ({ recipe, addFavorite }) => {
   return (
-    <div className="card h-100 recipe-card">
+    <div className="card mb-4">
       <img
         src={recipe.img_url}
         className="card-img-top"
-        alt="Recipe Image"
+        alt={recipe.title}
         style={{ height: "200px", objectFit: "cover" }}
       />
       <div className="card-body">
         <h5 className="card-title">{recipe.title}</h5>
-        <h6 className="card-subtitle mb-2 text-muted">{recipe.subtitle}</h6>
+        <h6 className="card-subtitle mb-2 text-muted">
+          {recipe.subtitle}
+        </h6>
         <p className="card-text">{recipe.desc}</p>
-        {/* 'addFavorite' function is defined elsewhere */}
         <button
           type="button"
           className="btn btn-success"
           onClick={() => addFavorite(recipe)}
         >
-          <i className="fa-regular fa-heart"></i>
+          <i className="fa-regular fa-heart"></i> Add to Favorites
         </button>
       </div>
     </div>
   );
-}
+};
+
+export default RecipeCard;
+
 
 // import React from 'react'
 

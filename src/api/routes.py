@@ -54,12 +54,36 @@ def createUser():
 
     return jsonify(response_body), 200
 
+@api.route('/signup', methods=['PUT'])
+def updateUser():
+    # how to we only update what was changed - if no new information we don't it null
+    password = request.json.get("password")
+    email = request.json.get("email")
+    age = request.json.get("age")
+    height = request.json.get("height")
+    weight = request.json.get("weight")
+    activity_level = request.json.get("activity_level")
+
+    user = User.query.filter_by(email=email).first()
+    if user != None:
+        return jsonify({"msg": "email exists"}), 401
+    
+    user = User(password=password, email = email, age = age, height= height, weight = weight, activity_level = activity_level)
+    db.session.add(user)
+    db.session.commit()
+    
+    response_body = {
+        "msg": "User successfully added "
+    }
+
+    return jsonify(response_body), 200
+
 @api.route('/login', methods=['POST'])
 def handle_login():
     body = request.get_json()
     user = User.query.filter_by(email=body['email']).first()
     if user and bcrypt.check_password_hash(user.password, body['password']):
-        access_token = create_access_token(identity=body['email'])
+        access_token = create_access_token(identity=body['id'])
         return jsonify(access_token=access_token), 200
     else:
         return jsonify({"msg": "Bad email or password"}), 401
@@ -93,7 +117,6 @@ def protected():
         return jsonify(response_body)
     
     return jsonify({"id": user.id, "email": user.email }), 200
-
 
 #Contact
 @api.route('/contact', methods=['POST'])

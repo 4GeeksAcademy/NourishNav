@@ -10,19 +10,35 @@ const Private = () => {
     const handleChange = (e) => {
         setFile(URL.createObjectURL(e.target.files[0]))
     }
+    // useEffect(() => {
+    //     if (!store.user) {
+    //         actions.authenticateUser()
+    //             .then(() => {
+    //                 // If authentication is successful and user is retrieved,
+    //                 // you can optionally perform additional actions here.
+    //             })
+    //             .catch(() => {
+    //                 // If authentication fails, redirect to home.
+    //                 // navigate("/");
+    //             });
+    //     }
+    // }, [store.user]);
+
     useEffect(() => {
-        if (!store.user) {
-            actions.authenticateUser()
-                .then(() => {
-                    // If authentication is successful and user is retrieved,
-                    // you can optionally perform additional actions here.
-                })
-                .catch(() => {
-                    // If authentication fails, redirect to home.
-                    // navigate("/");
-                });
-        }
-    }, [actions, navigate, store.user]);
+        updateFunction();
+    }, [file])
+
+    const updateFunction = () => {
+        console.log("update function ran")
+        let response = process.env.BACKEND_URL + "";
+
+        //make the fetch for update profile 
+        // you can do in flux and call her using action.whateverYouKnowYourFunction
+        // or you can make the request here
+        // update means it will be a PUT request 
+    }
+
+
 
     return (
         <div className="container text-center">

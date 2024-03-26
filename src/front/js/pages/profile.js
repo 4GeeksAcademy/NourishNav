@@ -38,6 +38,7 @@ const Private = () => {
                     </div>
                     <select>
                         <option>option one</option>
+                        <option>option one</option>
                     </select>
                 </div>
 

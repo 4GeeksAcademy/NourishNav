@@ -54,7 +54,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			login: (form) => {
 				const store = getStore();
 				const url = apiUrl+"/api/token";
-				fetch(url, {
+				fetch(url,{
 					method: "Post",
 					headers: {
 						"Content-Type": "application/json",
@@ -64,6 +64,8 @@ const getState = ({ getStore, getActions, setStore }) => {
                       	"password": form.password
 					})					
 				})
+				
+
 				.then(async resp => {
 					console.log(resp.ok); // will be true if the response is successfull
 					console.log(resp.status); // the status code = 200 or code = 400 etc.
@@ -109,6 +111,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(data => {
 						setStore({ user: data });
 						resolve(data);
+						navigate('/profile');
 					})
 					.catch(error => {
 						reject(error);

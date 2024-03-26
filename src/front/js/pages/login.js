@@ -16,7 +16,7 @@ export default function Login() {
     e.preventDefault();
     try {
         await actions.login({ email, password });
-        navigate('/profile'); 
+        navigate('/Private'); 
     } catch (error) {
         setError(error.message);
     }

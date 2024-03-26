@@ -1,11 +1,15 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
 
 const Private = () => {
     const { store, actions } = useContext(Context);
     const navigate = useNavigate();
+    const [file, setFile] = useState("")
 
+    const handleChange = (e) => {
+        setFile(URL.createObjectURL(e.target.files[0]))
+    }
     useEffect(() => {
         if (!store.user) {
             actions.authenticateUser()
@@ -43,6 +47,8 @@ const Private = () => {
                 </div>
 
             )}
+            <input type="file" onChange={handleChange} />
+            <img src={file} height="300px" width="300px" />
         </div>
     );
 };

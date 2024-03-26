@@ -3,7 +3,7 @@ import "../../styles/loginpage.css";
 import { Context } from "../store/appContext";
 import { useNavigate, Link } from "react-router-dom";
 
-export default function Login() {  
+export default function Login() {
   const { store, actions } = useContext(Context);
   const [email, setemail] = useState("");
   const [password, setPassword] = useState("");
@@ -15,35 +15,32 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-        await actions.login({ email, password });
-        navigate('/Private'); 
+      await actions.login({ email, password });
+      navigate('/profile');
     } catch (error) {
-        setError(error.message);
+      setError(error.message);
     }
-};
+  };
 
-  
-
- 
-    return (
-      <form onSubmit={handleSubmit}>
-        <h1 className="">Login</h1>
-        <input
-          type="text"
-          placeholder="email"
-          value={email}
-          onChange={(e) => setemail(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button type="submit">Login</button>
-        <button>
-          <Link to="/forgot">Forgot Password</Link>
-        </button>
-      </form>
-    );
+  return (
+    <form onSubmit={handleSubmit}>
+      <h1 className="">Login</h1>
+      <input
+        type="text"
+        placeholder="email"
+        value={email}
+        onChange={(e) => setemail(e.target.value)}
+      />
+      <input
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <button type="submit">Login</button>
+      <button>
+        <Link to="/forgot">Forgot Password</Link>
+      </button>
+    </form>
+  );
 }

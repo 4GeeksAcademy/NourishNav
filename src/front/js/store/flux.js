@@ -151,8 +151,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				if (token && token != null && token != undefined) setStore({ token: token });
 			},
 
-		}
-	};
+      },
+    },
+  };
+			
 };
 
 export default getState;

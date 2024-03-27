@@ -1,9 +1,8 @@
 """
 This module takes care of starting the API Server, Loading the DB, and Adding the endpoints.
 """
-from flask import Flask, request, jsonify, url_for, Blueprint, current_app 
-from flask_mail import Message, Mail  
-from api.models import db, User
+from flask import Flask, request, jsonify, url_for, Blueprint
+from api.models import db, User, Favorites
 from api.utils import generate_sitemap, APIException
 import hashlib
 from flask_jwt_extended import create_access_token
@@ -12,8 +11,6 @@ from flask_jwt_extended import jwt_required
 from flask_jwt_extended import JWTManager
 from flask_cors import CORS
 from flask_bcrypt import Bcrypt  # Add this import for Bcrypt
-
-mail = Mail()
 
 api = Blueprint('api', __name__)
 
@@ -54,36 +51,12 @@ def createUser():
 
     return jsonify(response_body), 200
 
-@api.route('/signup', methods=['PUT'])
-def updateUser():
-    # how to we only update what was changed - if no new information we don't it null
-    password = request.json.get("password")
-    email = request.json.get("email")
-    age = request.json.get("age")
-    height = request.json.get("height")
-    weight = request.json.get("weight")
-    activity_level = request.json.get("activity_level")
-
-    user = User.query.filter_by(email=email).first()
-    if user != None:
-        return jsonify({"msg": "email exists"}), 401
-    
-    user = User(password=password, email = email, age = age, height= height, weight = weight, activity_level = activity_level)
-    db.session.add(user)
-    db.session.commit()
-    
-    response_body = {
-        "msg": "User successfully added "
-    }
-
-    return jsonify(response_body), 200
-
 @api.route('/login', methods=['POST'])
 def handle_login():
     body = request.get_json()
     user = User.query.filter_by(email=body['email']).first()
     if user and bcrypt.check_password_hash(user.password, body['password']):
-        access_token = create_access_token(identity=body['id'])
+        access_token = create_access_token(identity=body['email'])
         return jsonify(access_token=access_token), 200
     else:
         return jsonify({"msg": "Bad email or password"}), 401
@@ -109,14 +82,53 @@ def create_token():
 def protected():
     current_user_id = get_jwt_identity()    
     user = User.query.get(current_user_id)
-
+    if user is None:
+        return jsonify({"msg": "Please login"})
+    else:
+        return jsonify({"user_id": user.id, "email":user.email}), 200
     if user == None:
-        response_body = {
-            "msg": "Please login to continue"
-        }
-        return jsonify(response_body)
+            response_body = {
+                "msg": "Please login to continue"
+            }
+            return jsonify(response_body)
+
+        return jsonify({"id": user.id, "email": user.email }), 200
+# end of user related routes
+
+# start of favorites routes
+@api.route('/favorites', methods=['POST'])
+@jwt_required()
+def addFavorite():
+    uid = get_jwt_identity()
+    request_body = request.get_json()
+    favorite = Favorites(uid = uid,recipe_name = repr(request_body['recipe_name']),)
+    db.session.add(favorite)   
+    db.session.commit()
+    return jsonify(msg="okie ^^~")
+  
+
+@api.route('/favorites', methods=['DELETE'])
+@jwt_required()
+def removeFav():
+    uid = get_jwt_identity()
+    request_body = request.get_json()
+    recipe_name=repr(request_body['recipe_name'])
+    Favorites.query.filter_by(uid = uid, recipe_name=recipe_name).delete()
+    db.session.commit()
+    db.session.commit()
+    return jsonify(msg="okie ^^~")
+
+@api.route('/favorites', methods=['GET'])
+@jwt_required()
+def getFavorites():
+    uid = get_jwt_identity()
+    user = User.query.filter_by(id=uid).first()
+
+    return jsonify(favorites=user.get_favorites())
+# end of favorites routes
+
     
-    return jsonify({"id": user.id, "email": user.email }), 200
+
 
 #Contact
 @api.route('/contact', methods=['POST'])
@@ -154,3 +166,4 @@ def handle_contact_form():
         "message": "Your message has been successfully submitted. We will get back to you soon!"
     }
     return jsonify(response_body), 200
+

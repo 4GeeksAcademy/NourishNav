@@ -49,3 +49,4 @@ export const Home = () => {
         </div>
     );
 };
+

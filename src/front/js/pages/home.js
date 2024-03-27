@@ -17,7 +17,7 @@ export const Home = () => {
         try {
             const result = await actions.login({ email, password });
             // if (result) {
-            navigate("/profile"); // Navigate to profile if login is successful
+            navigate("/profile"); 
             // }
         } catch (error) {
             setLoginError("Failed to log in: " + error.message);

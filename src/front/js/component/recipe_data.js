@@ -47,4 +47,30 @@ export const recipe_list = [
     desc: "Savor the freshness in every bite with our Veggie Wrap, a vibrant medley of crisp vegetables and tangy sauce, all snugly wrapped in a soft, whole-grain tortilla. Perfect for a quick, healthy lunch on the go!",
     mealType: "Lunch",
   },
+  {
+    id: "7",
+    title: "Pesto Bowtie Pasta",
+    img_url:
+      "https://i.ibb.co/s3GLGWz/eaters-collective-12e-HC6-Fx-Pyg-unsplash.jpg",
+    subtitle: "A Taste of Italy",
+    desc: "Savor the delightful harmony of tender bowtie pasta coated in a luscious basil pesto sauce. Our Pesto Bowtie Pasta offers a burst of fresh flavors with every bite, combining fragrant basil, toasted pine nuts, and grated Parmesan cheese. Perfect for a quick and satisfying meal that brings a taste of Italy to your table.",
+    mealType: "Dinner",
+  },
+  {
+    id: "8",
+    title: "Golden Butternut Squash Soup",
+    img_url:
+      "https://i.ibb.co/xJ9cpb4/monika-grabkowska-VVPC-DEBi2-I-unsplash.jpg",
+    subtitle: "A Warm Embrace in a Bowl",
+    desc: "Indulge in the comforting warmth of our Golden Butternut Squash Soup, a velvety blend that captures the essence of autumn in every spoonful. Crafted with the finest butternut squash, this soup is gently simmered to perfection, releasing the natural sweetness and rich flavors of the squash. Enhanced with a touch of freshly grated nutmeg and a swirl of cream, it offers a smooth, creamy texture that comforts the soul.",
+    mealType: "Dinner",
+  },
+  {
+    id: "9",
+    title: "Sunshine Chicken and Yellow Rice",
+    img_url: "https://i.ibb.co/SBTX1Wc/likemeat-f96pzs-JZpcs-unsplash.jpg",
+    subtitle: "A Vibrant Symphony of Flavors",
+    desc: "Savor the harmonious blend of tender chicken and aromatic yellow rice in our delightful Yellow Rice and Chicken dish. Succulent chicken pieces, seasoned to perfection, mingle with fragrant rice infused with turmeric and spices, creating a symphony of flavors that tantalize the taste buds. This classic combination promises a satisfying meal that's both comforting and full of flavor.",
+    mealType: "Dinner",
+  },
 ];

@@ -15,7 +15,7 @@ function MacroTracker() {
     fat: 0,
     carbohydrates: 0,
   });
-  // Step 1: Add State for Selected Date
+  // Add State for Selected Date
   const [selectedDate, setSelectedDate] = useState(() => {
     const today = new Date();
     const localDate = today.toLocaleDateString('en-CA'); // YYYY-MM-DD format
@@ -72,7 +72,7 @@ function MacroTracker() {
   return (
     <div className="container">
       <h2>Macro Tracking</h2>
-      {/* Step 2: Modify the UI to Include Date Picker */}
+      {/*Modify the UI to Include Date Picker */}
       <div className="date-picker-container">
         <label htmlFor="date-picker">Select Date: </label>
         <input

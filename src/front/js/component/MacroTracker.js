@@ -15,9 +15,14 @@ function MacroTracker() {
     fat: 0,
     carbohydrates: 0,
   });
-  const [editing, setEditing] = useState({ isEditing: false, meal: null, id: null });
+  // Step 1: Add State for Selected Date
+  const [selectedDate, setSelectedDate] = useState(() => {
+    const today = new Date();
+    const localDate = today.toLocaleDateString('en-CA'); // YYYY-MM-DD format
+    return localDate;
+  });
 
-  const addOrUpdateFood = (meal) => {
+  const addFood = (meal) => {
     const foodInput = document.getElementById(`${meal}-food`);
     const caloriesInput = document.getElementById(`${meal}-calories`);
     const proteinInput = document.getElementById(`${meal}-protein`);
@@ -31,30 +36,22 @@ function MacroTracker() {
     const carbohydrates = parseInt(carbohydratesInput.value);
 
     if (foodItem !== "" && !isNaN(calories) && !isNaN(protein) && !isNaN(fat) && !isNaN(carbohydrates)) {
-      if (editing.isEditing) {
-        // Update existing food item
-        const updatedMeals = meals[meal].map((item) => 
-          item.id === editing.id ? { ...item, foodItem, calories, protein, fat, carbohydrates } : item
-        );
-        setMeals({ ...meals, [meal]: updatedMeals });
-        setEditing({ isEditing: false, meal: null, id: null });
-      } else {
-        // Add new food item
-        const newMeal = [...meals[meal], { id: Date.now(), foodItem, calories, protein, fat, carbohydrates }];
-        setMeals({ ...meals, [meal]: newMeal });
-      }
+      const newMeal = [...meals[meal], { id: Date.now(), foodItem, calories, protein, fat, carbohydrates }];
+      setMeals({ ...meals, [meal]: newMeal });
 
-      // Update total macros
-      const operation = editing.isEditing ? 0 : 1; // 1 for add, 0 for update (since update is just a replace, no need to recalculate totals here)
       setTotalMacros({
-        calories: totalMacros.calories + (calories * operation),
-        protein: totalMacros.protein + (protein * operation),
-        fat: totalMacros.fat + (fat * operation),
-        carbohydrates: totalMacros.carbohydrates + (carbohydrates * operation),
+        calories: totalMacros.calories + calories,
+        protein: totalMacros.protein + protein,
+        fat: totalMacros.fat + fat,
+        carbohydrates: totalMacros.carbohydrates + carbohydrates,
       });
 
-      // Clear input fields
-      [foodInput, caloriesInput, proteinInput, fatInput, carbohydratesInput].forEach(input => input.value = "");
+      // Clear input fields after adding
+      foodInput.value = "";
+      caloriesInput.value = "";
+      proteinInput.value = "";
+      fatInput.value = "";
+      carbohydratesInput.value = "";
     } else {
       alert("Please enter valid values for all fields.");
     }
@@ -64,7 +61,6 @@ function MacroTracker() {
     const updatedMeals = meals[meal].filter((item) => item.id !== id);
     setMeals({ ...meals, [meal]: updatedMeals });
 
-    // Update total macros
     setTotalMacros({
       calories: totalMacros.calories - macros.calories,
       protein: totalMacros.protein - macros.protein,
@@ -73,44 +69,50 @@ function MacroTracker() {
     });
   };
 
-  const startEdit = (meal, item) => {
-    setEditing({ isEditing: true, meal, id: item.id });
-    document.getElementById(`${meal}-food`).value = item.foodItem;
-    document.getElementById(`${meal}-calories`).value = item.calories;
-    document.getElementById(`${meal}-protein`).value = item.protein;
-    document.getElementById(`${meal}-fat`).value = item.fat;
-    document.getElementById(`${meal}-carbohydrates`).value = item.carbohydrates;
-  };
-
   return (
     <div className="container">
       <h2>Macro Tracking</h2>
+      {/* Step 2: Modify the UI to Include Date Picker */}
+      <div className="date-picker-container">
+        <label htmlFor="date-picker">Select Date: </label>
+        <input
+          type="date"
+          id="date-picker"
+          className="form-control"
+          value={selectedDate}
+          onChange={(e) => setSelectedDate(e.target.value)}
+        />
+      </div>
 
+      {/* Meal Sections */}
       {Object.keys(meals).map((meal, index) => (
         <div className="meal-container" key={index}>
+          {meal === "breakfast" && (
+            <div className="date-display">
+              Tracking for: <strong>{selectedDate}</strong>
+            </div>
+          )}
           <div className="meal-name">{meal.charAt(0).toUpperCase() + meal.slice(1)}</div>
           <div className="food-item">
-            {/* Input Fields */}
             <input type="text" id={`${meal}-food`} className="form-control" placeholder="Enter food item" />
             <input type="number" id={`${meal}-calories`} className="form-control" placeholder="Calories" />
             <input type="number" id={`${meal}-protein`} className="form-control" placeholder="Protein (g)" />
             <input type="number" id={`${meal}-fat`} className="form-control" placeholder="Fat (g)" />
             <input type="number" id={`${meal}-carbohydrates`} className="form-control" placeholder="Carbohydrates (g)" />
-            <button className="btn btn-primary" onClick={() => addOrUpdateFood(meal)}>
-              {editing.isEditing && editing.meal === meal ? "Update" : "Add"}
-            </button>
+            <button className="btn btn-primary" onClick={() => addFood(meal)}>Add</button>
           </div>
           <ul className="list-group mt-2">
-            {/* Meal Items List */}
-            {meals[meal].map((item) => (
-              <li className="list-group-item d-flex justify-content-between align-items-center" key={item.id}>
+            {meals[meal].map((item, index) => (
+              <li className="list-group-item d-flex justify-content-between align-items-center" key={index}>
                 <span>
                   {item.foodItem} - {item.calories} calories, {item.protein}g protein, {item.fat}g fat, {item.carbohydrates}g carbs
                 </span>
-                <div>
-                  <button className="btn btn-warning btn-sm" onClick={() => startEdit(meal, item)}>Edit</button>
-                  <button className="btn btn-danger btn-sm" onClick={() => deleteFood(meal, item.id, item)}>Delete</button>
-                </div>
+                <button
+                  className="btn btn-danger btn-sm"
+                  onClick={() => deleteFood(meal, item.id, { calories: item.calories, protein: item.protein, fat: item.fat, carbohydrates: item.carbohydrates })}
+                >
+                  Delete
+                </button>
               </li>
             ))}
           </ul>
@@ -118,7 +120,7 @@ function MacroTracker() {
       ))}
 
       <div className="mt-4">
-        Total Macros - Calories: {totalMacros.calories}, Protein: {totalMacros.protein}g, Fat: {totalMacros.fat}g, Carbohydrates: {totalMacros.carbohydrates}g
+        Total Calories: {totalMacros.calories}, Protein: {totalMacros.protein}g, Fat: {totalMacros.fat}g, Carbohydrates: {totalMacros.carbohydrates}g
       </div>
     </div>
   );

@@ -12,6 +12,11 @@ class User(db.Model):
     weight = db.Column(db.Integer, nullable=True)
     activity_level = db.Column(db.String(120), nullable=False)
 
+    def get_favorites(self):
+        favorites = Favorites.query.filter_by(uid=self.id)
+        favorites = [favorite.serialize() for favorite in favorites]
+        return favorites
+
     def __repr__(self):
         return f'<User {self.id}>'
 
@@ -24,9 +29,11 @@ class User(db.Model):
             "height": self.height,
             "weight": self.weight,
             "activity_level": self.activity_level,
+            "favorites": self.get_favorites(),
             # do not serialize the password, its a security breach
         }
 
+<<<<<<< HEAD
 class Recipe(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(60), nullable=True)
@@ -49,3 +56,21 @@ class Recipe(db.Model):
 
             # do not serialize the password, its a security breach
         # }
+=======
+class Favorites(db.Model):
+    __tablename__ = "Favorites"
+    id = db.Column(db.Integer, primary_key=True, unique=True)
+    uid = db.Column(db.Integer, nullable=False)
+    recipe_name =db.Column(db.String(2000), nullable=False)
+
+
+    def __repr__(self):
+        return f'<Favorite {self.recipe_name}>'
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "uid": self.uid,
+            "recipe_name": self.recipe_name
+        }
+>>>>>>> main

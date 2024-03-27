@@ -73,7 +73,10 @@
 		]
 	},
 	"dependencies": {
+<<<<<<< HEAD
 		"axios": "^1.6.8",
+=======
+>>>>>>> main
 		"bootstrap": "^5.3.3",
 		"prop-types": "^15.6.1",
 		"react": "^16.8.4",

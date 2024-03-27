@@ -1,6 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { recipe_list } from "../component/recipe_data";
+import "../../styles/recipe.css";
 
-const Recipe = ({ recipeList }) => {
+const Recipe = () => {
+  useEffect(() => {
+    console.log(recipe_list);
+  }, []);
   const addFavorite = (recipe) => {
     console.log("Add to favorites:", recipe.title);
     // Implement add to favorites functionality here
@@ -10,7 +15,7 @@ const Recipe = ({ recipeList }) => {
     <div className="container">
       <h1>Recipes</h1>
       <div className="row">
-        {recipeList.map((recipe) => (
+        {recipe_list.map((recipe) => (
           <div key={recipe.id} className="col-md-4">
             <div className="card">
               <img
@@ -22,7 +27,7 @@ const Recipe = ({ recipeList }) => {
                 <h5 className="card-title">{recipe.title}</h5>
                 <p className="card-text">{recipe.desc}</p>
                 <button
-                  className="btn btn-primary"
+                  className="btn btn-success"
                   onClick={() => addFavorite(recipe)}
                 >
                   Add to Favorites

@@ -10,7 +10,7 @@ import Login from "./pages/login";
 import Private from "./pages/profile";
 import Recipe from "./pages/Recipe.jsx";
 
-import Signup from "./pages/signup";
+import Signup from "./component/signup";
 
 import { Single } from "./pages/single";
 import injectContext from "./store/appContext";

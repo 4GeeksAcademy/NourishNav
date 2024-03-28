@@ -18,7 +18,7 @@ const Recipe = () => {
   };
 
   const MealSection = ({ mealType }) => (
-    <div>
+    <>
       <h2>{mealType}</h2>
       <div className="row">
         {filterByMealType(mealType).map((recipe) => (
@@ -43,11 +43,13 @@ const Recipe = () => {
           </div>
         ))}
       </div>
-    </div>
+    </>
   );
 
   return (
-    <div className="container">
+    <div className="container-fluid">
+      {" "}
+      {/* Change container to container-fluid */}
       <h1>Recipes</h1>
       <MealSection mealType="Breakfast" />
       <MealSection mealType="Lunch" />

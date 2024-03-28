@@ -33,7 +33,6 @@ class User(db.Model):
             # do not serialize the password, its a security breach
         }
 
-<<<<<<< HEAD
 class Recipe(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(60), nullable=True)
@@ -56,21 +55,3 @@ class Recipe(db.Model):
 
             # do not serialize the password, its a security breach
         # }
-=======
-class Favorites(db.Model):
-    __tablename__ = "Favorites"
-    id = db.Column(db.Integer, primary_key=True, unique=True)
-    uid = db.Column(db.Integer, nullable=False)
-    recipe_name =db.Column(db.String(2000), nullable=False)
-
-
-    def __repr__(self):
-        return f'<Favorite {self.recipe_name}>'
-
-    def serialize(self):
-        return {
-            "id": self.id,
-            "uid": self.uid,
-            "recipe_name": self.recipe_name
-        }
->>>>>>> main

@@ -1,6 +1,39 @@
+/* Global Styles */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.container-fluid {
+  padding: 20px;
+}
+
+/* Recipe Styles */
+.bg-image {
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  background-position: center top;
+}
+
+.hero-section {
+  background-size: cover;
+  background-position: center;
+  min-height: 80vh;
+}
+
+.card {
+  background-color: rgba(0, 0, 0, 0.7);
+  height: 200px; /* Adjusted height */
+}
+
+.recipe-card {
+  background-color: #72bb53; /* Changed background color */
+  width: 100%; /* Ensure the card takes up the full width */
+}
+
 .recipe-container {
   padding: 20px;
-  background-color: #f4f4f2; /* neutral beige */
+  background-color: #ee6e57; /* Changed background color */
 }
 
 .recipe-content {
@@ -9,7 +42,7 @@
 
 .recipe-heading {
   font-size: 2.5rem;
-  color: #4d834e; /* muted green */
+  color: #ee6e57; /* Changed text color */
 }
 
 .recipe-description {
@@ -23,7 +56,7 @@
 
 .feature-heading {
   font-size: 1.5rem;
-  color: #4d834e; /* muted green */
+  color: #72bb53; /* Changed text color */
 }
 
 .feature-description {
@@ -37,7 +70,7 @@
 
 .upgrade-heading {
   font-size: 1.5rem;
-  color: #4d834e; /* muted green */
+  color: #72bb53; /* Changed text color */
 }
 
 .recipes-section {
@@ -46,7 +79,7 @@
 
 .recipes-heading {
   font-size: 1.8rem;
-  color: #4d834e; /* muted green */
+  color: #72bb53; /* Changed text color */
 }
 
 .whats-hot-heading {
@@ -54,33 +87,14 @@
   color: #6c757d; /* neutral gray */
 }
 
-.bg-image {
-  background-size: 100% auto;
-  background-repeat: no-repeat;
-  background-position: center top;
-  height: 50vh;
-}
-
-.hero-section {
-  background-size: cover;
-  background-position: center;
-  min-height: 80vh;
-}
-
-.card {
-  background-color: rgba(
-    0,
-    0,
-    0,
-    0.7
-  ); /* Semi-transparent background for recipe of the day */
-}
-
-.recipe-card {
-  background-color: #eeeeee;
-}
-
 .hero-section h1 {
   color: #ffffff; /* Adjust text color as needed */
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .card {
+    height: 150px; /* Adjusted height for smaller screens */
+  }
 }

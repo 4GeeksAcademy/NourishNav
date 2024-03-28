@@ -61,6 +61,18 @@ def handle_login():
     else:
         return jsonify({"msg": "Bad email or password"}), 401
     
+@api.route('/user', methods=['GET'])
+@jwt_required()
+def get_user():
+    id = get_jwt_identity()
+    user = User.query.filter_by(id=id).first()
+
+    if user is not None:
+        return jsonify(user.serialize()), 200
+
+    return jsonify({"message": "Uh-oh"}), 400
+
+
 
 @api.route('/token', methods=['POST'])
 def create_token():
@@ -84,15 +96,18 @@ def protected():
     user = User.query.get(current_user_id)
     if user is None:
         return jsonify({"msg": "Please login"})
+    #elif?
     else:
         return jsonify({"user_id": user.id, "email":user.email}), 200
-    if user == None:
-            response_body = {
-                "msg": "Please login to continue"
-            }
-            return jsonify(response_body)
+#     if user == None:
+#         response_body = {
+#             "msg": "Please login to continue"
+#         }
+#         return jsonify(response_body)
 
-        return jsonify({"id": user.id, "email": user.email }), 200
+# return jsonify({"id": user.id, "email": user.email }), 200
+    
+
 # end of user related routes
 
 # start of favorites routes

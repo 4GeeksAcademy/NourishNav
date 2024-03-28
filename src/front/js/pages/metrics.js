@@ -40,12 +40,21 @@ export default function Metrics() {
     }
   }
 
-
   return (
-    <div className="bottle" onClick={handleBottle}>
+    <div id="metrics" className="bottle" onClick={handleBottle}>
       {[...Array(8)].map((_, index) => (
-        <div key={index} className={index < glasses ? "glass filled" : "glass"}>
-          {index + 1}
+        <div
+          key={index}
+          className={
+            index < glasses
+              ? "glass filled"
+              : index == glasses && index !== 0
+              ? "glass top"
+              : "glass empty"
+          }
+          id={index}
+        >
+          {/* {index + 1} */}
         </div>
       ))}
     </div>

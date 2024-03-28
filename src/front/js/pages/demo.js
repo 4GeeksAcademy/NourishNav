@@ -1,17 +1,20 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Modal } from "../component/modal";
+import Private from "./profile";
+import Metrics from "./metrics";
 import { Context } from "../store/appContext";
-import Favorites from "./favorites";
+import AccountModel from "../component/accountModel";
 
 export const Demo = () => {
   const { store, actions } = useContext(Context);
 
   return (
     <div className="container">
-      <Modal />
-      <Favorites item={"whatever"} />
+      {/* <Modal /> */}
+      {/* <Private /> */}
+      <AccountModel />
+      {/* <Metrics /> */}
     </div>
   );
-
 };

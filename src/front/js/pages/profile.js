@@ -10,19 +10,22 @@ const Private = () => {
     const handleChange = (e) => {
         setFile(URL.createObjectURL(e.target.files[0]))
     }
-    // useEffect(() => {
-    //     if (!store.user) {
-    //         actions.authenticateUser()
-    //             .then(() => {
-    //                 // If authentication is successful and user is retrieved,
-    //                 // you can optionally perform additional actions here.
-    //             })
-    //             .catch(() => {
-    //                 // If authentication fails, redirect to home.
-    //                 // navigate("/");
-    //             });
-    //     }
-    // }, [store.user]);
+    useEffect(() => {
+        if (!store.user) {
+            actions.authenticateUser()
+                .then((userData) => {
+                    // If authentication is successful and user is retrieved,
+                    // you can optionally perform additional actions here.
+                            console.log("User authenticated:", userData);
+                            setStore({ user: userData });
+                })
+                .catch((error) => {
+                    // If authentication fails, redirect to home.
+                    // navigate("/");
+                        console.error("Authentication failed:", error);
+                });
+        }
+    }, [store.user]);
 
     useEffect(() => {
         updateFunction();

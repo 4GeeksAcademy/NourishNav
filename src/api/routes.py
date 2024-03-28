@@ -92,7 +92,7 @@ def protected():
             }
             return jsonify(response_body)
 
-        return jsonify({"id": user.id, "email": user.email }), 200
+            return jsonify({"id": user.id, "email": user.email }), 200
 # end of user related routes
 
 # start of favorites routes

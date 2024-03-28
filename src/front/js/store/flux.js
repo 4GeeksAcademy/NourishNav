@@ -91,7 +91,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             //console.log(resp.text()); // will try return the exact result as string
             const data = await resp.json();
             sessionStorage.setItem("token", data.token);
-            setStore({ token: data.token});
+            setStore({ token: data.token });
 
             // console.log(store.user);
           })
@@ -129,21 +129,19 @@ const getState = ({ getStore, getActions, setStore }) => {
             });
         });
       },
-      updateUser: async () => {
-        const url = apiUrl + "/api/signup";
+      updateUser: async (email, weight, activity_level) => {
+        const url = apiUrl + "/api/user";
         try {
           const response = await fetch(url, {
             method: "PUT",
             headers: {
               "Content-Type": "application/json",
+              Authorization: "Bearer " + sessionStorage.getItem("token"),
             },
             body: JSON.stringify({
-              email: form.email,
-              password: form.password,
-              age: form.age,
-              height: form.height,
-              weight: form.weight,
-              activity_level: form.activity,
+              email: email,
+              weight: weight,
+              activity_level: activity_level,
             }),
           });
           if (!response.ok) {
@@ -152,7 +150,6 @@ const getState = ({ getStore, getActions, setStore }) => {
             throw new Error(errorBody.message || "Signup failed");
           }
           await response.json(); // Assuming you might use this for something
-          if (callback) callback(); // Call the callback if signup is successful
         } catch (error) {
           console.error("Signup error:", error);
           throw error; // Rethrow the error so it can be caught and handled in the component

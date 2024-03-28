@@ -14,7 +14,7 @@ export const Demo = () => {
       {/* <Modal /> */}
       {/* <Private /> */}
       <AccountModel />
-      {/* <Metrics /> */}
+      <Metrics />
     </div>
   );
 };

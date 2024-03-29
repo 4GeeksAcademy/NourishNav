@@ -12,8 +12,8 @@ const Macrocalculator = () => {
         const options = {
             method: 'GET',
             headers: {
-                'X-RapidAPI-Key': 'SIGN-UP-FOR-KEY',
-                'X-RapidAPI-Host': 'fitness-calculator.p.rapidapi.com'
+		'X-RapidAPI-Key': 'a1b0c2e066mshd837a4a5335ce94p17fdbajsne294abb41532',
+		'X-RapidAPI-Host': 'fitness-calculator.p.rapidapi.com'
             }
         };
 
@@ -34,19 +34,24 @@ const Macrocalculator = () => {
 
     return (
         <div>
-            
             {result && (
-                <div>
-                    <pre>{JSON.stringify(result, null, 2)}</pre>
-                </div>
+            <div>
+                <pre>{JSON.stringify(result, null, 2)}</pre>
+            </div>
             )}
             {error && (
-                <div>
-                    <p>Error: {error.message}</p>
-                </div>
+            <div>
+                <p>Error: {error.message}</p>
+            </div>
             )}
-        </div>
-    );
-};
+
+//         <div style={{ minHeight: "50dvh", border: "2px solid black", borderRadius: "12.5%", background: "beige"}}>
+//         <div>Macro Calculator</div>
+//         <input type="text" onChange={(e) => setQuery(e.target.value)} />
+//         <button className="btn btn-primary" onClick={() => handleApiCall()}>Search</button>
+        </div> : 
+		</div >
+//     );
+// };
 
 export default Macrocalculator;

@@ -11,6 +11,8 @@ from flask_jwt_extended import jwt_required
 from flask_jwt_extended import JWTManager
 from flask_cors import CORS
 from flask_bcrypt import Bcrypt  # Add this import for Bcrypt
+from flask_mail import Mail
+from flask_mail import Message
 
 api = Blueprint('api', __name__)
 
@@ -146,24 +148,24 @@ def handle_contact_form():
     # Example: Send email notification
     # Replace this with your actual email sending logic
     def send_email_notification(name, email, message):
-    # Assuming you have configured Flask-Mail in your Flask app
-        mail = current_app.extensions['mail']
+        # Assuming you have configured Flask-Mail in your Flask app
+        mail = Mail()
 
-    # Create the message
-    msg = Message(subject="New Contact Form Submission",
-                  sender=("Your Name", "your_email@example.com"),
-                  recipients=["your_recipient_email@example.com"])  # Add your recipient email address here
+        # Create the message
+        msg = Message(subject="New Contact Form Submission",
+                    sender=("Your Name", "your_email@example.com"),
+                    recipients=["your_recipient_email@example.com"])  # Add your recipient email address here
 
-    # Customize the email body
-    msg.body = f"Name: {name}\nEmail: {email}\nMessage: {message}"
+        # Customize the email body
+        msg.body = f"Name: {name}\nEmail: {email}\nMessage: {message}"
 
-    # Send the email
-    mail.send(msg)
-    send_email_notification(name, email, message)
+        # Send the email
+        mail.send(msg)
+        send_email_notification(name, email, message)
 
-    # Respond to the client with a success message
-    response_body = {
-        "message": "Your message has been successfully submitted. We will get back to you soon!"
-    }
-    return jsonify(response_body), 200
+        # Respond to the client with a success message
+        response_body = {
+            "message": "Your message has been successfully submitted. We will get back to you soon!"
+        }
+        return jsonify(response_body), 200
 

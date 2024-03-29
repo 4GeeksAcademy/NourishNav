@@ -1,6 +1,7 @@
 import React, { useEffect, useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
+import { Macrotracker } from "../component/macrotracker";
 
 const Private = () => {
     const { store, actions } = useContext(Context);
@@ -10,22 +11,22 @@ const Private = () => {
     const handleChange = (e) => {
         setFile(URL.createObjectURL(e.target.files[0]))
     }
-    useEffect(() => {
-        if (!store.user) {
-            actions.authenticateUser()
-                .then((userData) => {
-                    // If authentication is successful and user is retrieved,
-                    // you can optionally perform additional actions here.
-                            console.log("User authenticated:", userData);
-                            setStore({ user: userData });
-                })
-                .catch((error) => {
-                    // If authentication fails, redirect to home.
-                    // navigate("/");
-                        console.error("Authentication failed:", error);
-                });
-        }
-    }, [store.user]);
+    // useEffect(() => {
+    //     if (!store.user) {
+    //         actions.authenticateUser()
+    //             .then((userData) => {
+    //                 // If authentication is successful and user is retrieved,
+    //                 // you can optionally perform additional actions here.
+    //                         console.log("User authenticated:", userData);
+    //                         setStore({ user: userData });
+    //             })
+    //             .catch((error) => {
+    //                 // If authentication fails, redirect to home.
+    //                 // navigate("/");
+    //                     console.error("Authentication failed:", error);
+    //             });
+    //     }
+    // }, [store.user]);
 
     useEffect(() => {
         updateFunction();
@@ -45,6 +46,7 @@ const Private = () => {
 
     return (
         <div className="container text-center">
+            <Macrotracker/>
             <h1>Hello!</h1>
             {store.user && (
                 <div>

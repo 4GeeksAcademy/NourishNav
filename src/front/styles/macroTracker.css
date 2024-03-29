@@ -1,12 +1,17 @@
+body {
+  background: linear-gradient(to bottom, #72bb53, #abebae);
+}
+
 .container {
-  max-width: 600px;
-  margin: 0 auto;
+  width: 100%;
+  max-width: 600px; /* Adjust maximum width as needed */
+  margin: 0 auto; /* Center horizontally */
   padding: 20px;
 }
 
 h2 {
   text-align: center;
-  color: #2ecc71; /* Mint green */
+  color: #2e8540; /* Darker green */
 }
 
 .meal-container {
@@ -21,7 +26,7 @@ h2 {
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 10px;
-  color: #2ecc71; /* Mint green */
+  color: #2e8540; /* Darker green */
 }
 
 .food-item input {
@@ -33,7 +38,7 @@ h2 {
 
 .food-item button {
   border: none;
-  background-color: #2ecc71; /* Mint green */
+  background-color: #2e8540; /* Darker green */
   color: white;
   padding: 5px 10px;
   border-radius: 5px;
@@ -41,7 +46,7 @@ h2 {
 }
 
 .food-item button:hover {
-  background-color: #27ae60; /* Darker mint green on hover */
+  background-color: #1d5d24; /* Darker shade of green on hover */
 }
 
 .list-group-item {
@@ -52,25 +57,46 @@ h2 {
 
 #total-calories {
   font-weight: bold;
-  color: #2ecc71; /* Mint green */
+  color: #2e8540; /* Darker green */
 }
 
-/* Media queries for responsiveness */
-
-/* For devices with a max width of 768px (e.g., tablets) */
-@media (max-width: 768px) {
-  .container {
-    max-width: 90%; /* Adjust to fit the screen width */
-  }
+.calories-container {
+  display: flex; /* Use flexbox */
+  justify-content: space-between; /* Distribute items evenly */
+  align-items: center; /* Center items vertically */
 }
 
-/* For devices with a max width of 576px (e.g., smartphones) */
-@media (max-width: 576px) {
-  .container {
-    padding: 10px; /* Adjust padding for smaller screens */
-  }
+.circle {
+  width: 100px;
+  height: 100px;
+  background-color: white;
+  border-radius: 50%;
+  border: 2px solid #2e8540; /* Darker green */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  .meal-name {
-    font-size: 16px; /* Decrease font size for smaller screens */
-  }
+#total-calories {
+  font-size: 24px;
+}
+
+.modal-header {
+  color: #fff;
+  background-color: #2e8540; /* Darker green */
+  border-bottom: none;
+}
+
+.modal-content {
+  background-color: #f9f9f9; /* Light gray */
+}
+
+.modal-footer button {
+  background-color: #2e8540; /* Darker green */
+  border-color: #2e8540; /* Darker green */
+  color: white;
+}
+
+.modal-footer button:hover {
+  background-color: #1d5d24; /* Darker shade of green on hover */
 }

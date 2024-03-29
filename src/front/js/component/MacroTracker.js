@@ -96,6 +96,7 @@ function MacroTracker() {
       fat: prevTotalMacros.fat - macros.fat,
       carbohydrates: prevTotalMacros.carbohydrates - macros.carbohydrates,
     }));
+
     setEatenCalories(
       (prevEatenCalories) => prevEatenCalories - macros.calories
     );
@@ -130,7 +131,6 @@ function MacroTracker() {
     switch (mealType) {
       case "breakfast":
         return <i class="fa-solid fa-mug-saucer"></i>;
-      // return <FontAwesomeIcon icon={faCoffee} style={{ color: "#EE6E57", fontSize: "1.2em" }} />;
       case "lunch":
         return <i class="fa-solid fa-hotdog"></i>;
       case "dinner":

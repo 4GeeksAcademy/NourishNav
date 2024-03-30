@@ -103,7 +103,7 @@ h2 {
 .meal-icon {
   font-size: 30px; /* Adjust the size as needed */
   margin-right: 10px;
-  color: #EE6E57; /* Adjust the color as needed */
+  color: #ee6e57; /* Adjust the color as needed */
 }
 
 .meal-info {
@@ -113,4 +113,6 @@ h2 {
 
 .meal-details {
   margin-left: 10px;
+  display: flex;
+  flex-direction: column;
 }

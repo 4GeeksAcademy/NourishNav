@@ -46,7 +46,7 @@ export const Footer = () => {
         </div>
       </div>
 
-      <footer id="footer" className="mt-auto py-3 text-center">
+      {/* <footer id="footer" className="mt-auto py-3 text-center">
         <nav className="navbar navbar-expand-lg bg-body-tertiary">
           <div className="container-fluid">
             <Link className="navbar-brand" to={store.user ? "/profile" : "/"}>
@@ -127,7 +127,7 @@ export const Footer = () => {
             </div>
           </div>
         </nav>
-      </footer>
+      </footer> */}
     </div>
   );
 };

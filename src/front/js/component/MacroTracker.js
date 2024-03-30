@@ -64,13 +64,16 @@ function MacroTracker() {
       ...prevMeals,
       [mealTypeToAdd]: [...prevMeals[mealTypeToAdd], newFoodItem],
     }));
-
+    console.log(totalMacros);
+    console.log(parseInt(calories));
+    console.log(parseInt(protein));
     setTotalMacros((prevTotalMacros) => ({
       calories: prevTotalMacros.calories + parseInt(calories),
       protein: prevTotalMacros.protein + parseInt(protein),
       fat: prevTotalMacros.fat + parseInt(fat),
       carbohydrates: prevTotalMacros.carbohydrates + parseInt(carbohydrates),
     }));
+
     setEatenCalories(
       (prevEatenCalories) => prevEatenCalories + parseInt(calories)
     );
@@ -147,30 +150,24 @@ function MacroTracker() {
       <h1 style={{ color: "#FFFFFF", textAlign: "center", fontWeight: "bold" }}>
         NourishNav
       </h1>
-      <div className="calories-container">
-        <div
-          className="eaten-calories"
-          style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "24px" }}
-        >
-          {eatenCalories} EATEN
-        </div>
-        <div className="circle" style={{ width: "150px", height: "150px" }}>
-          {" "}
-          <span
-            id="total-calories"
-            style={{ color: "#72BB53", fontSize: "36px", fontWeight: "bold" }}
-          >
-            {" "}
-            {totalCaloriesAllowed}
-          </span>
-        </div>
-        <div
-          className="burned-calories"
-          style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "24px" }} // Adjust the font size here
-        >
-          {caloriesBurned} BURNED
-        </div>
-      </div>
+      <div className="calories-container" style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+  <div className="eaten-calories" style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "16px" }}>
+    {eatenCalories} EATEN
+  </div>
+  <div className="circle" style={{ width: "150px", height: "150px", position: "relative" }}>
+    <span
+      id="total-calories"
+      style={{ color: "#72BB53", fontSize: "30px", fontWeight: "bold", position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}
+    >
+      {totalCaloriesAllowed - eatenCalories + caloriesBurned}
+    </span>
+  </div>
+  <div className="burned-calories" style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "16px" }}>
+    {caloriesBurned} BURNED
+  </div>
+</div>
+
+
 
       <div className="row justify-content-center">
         <div className="col-md-4">
@@ -194,7 +191,7 @@ function MacroTracker() {
             <div className="meal-icon">{getMealIcon(mealType)}</div>
             {/* Meal name and recommended calories */}
             <div className="meal-details d-flex flex-column">
-              <div className="d-flex align-items-center">
+              <div className="d-flex align-items-center flex-column">
                 {/* Meal name */}
                 <div className="meal-name" style={{ color: "#EE6E57" }}>
                   {mealType.charAt(0).toUpperCase() + mealType.slice(1)}
@@ -271,7 +268,7 @@ function MacroTracker() {
                   backgroundColor: "transparent",
                   border: "none",
                   padding: "0",
-                }} // Add this style
+                }}
               >
                 <span aria-hidden="true">
                   <i class="fa-solid fa-x"></i>
